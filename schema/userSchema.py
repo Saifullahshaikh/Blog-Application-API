@@ -36,14 +36,14 @@ def signup(data: LoginData):
     print("xxxxxxxxxxxxxxxxxxxxx login")
     return {"code":200, "Data": user}
 
-# Replace get_current_user with your actual implementation of JWT token validation
+# function to get current user
 def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    return verify_token(token, credentials_exception)
+    return userService.verify_jwt_token(token, userService.secret_key)
 
 class BlogData(BaseModel):
     title: str
@@ -51,7 +51,8 @@ class BlogData(BaseModel):
     user_id: int
 
 @router.post("/blog/create")
-# def create_blog(data: BlogData, current_user: dict = Depends(get_current_user)):
+# def create_blog(data: BlogData, current_user: dict = Depends(userService.verify_token)):
+    # print(get_current_user)
 def create_blog(data: BlogData):
     blog_data = {"user_id": data.user_id, "title": data.title, "content": data.content}
     result = userService.userService.createBlogPost(blog_data)

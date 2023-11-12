@@ -29,6 +29,52 @@ class userModel:
                 else:
                     return None
         close_connection(conn)
+    @staticmethod
+    def get_user(id):
+        sql = "SELECT * FROM users WHERE id = %s"
+        conn = get_connection()
+
+        with conn:
+            with conn.cursor() as cursor:
+                cursor.execute(sql, (id,))
+                user = cursor.fetchone()
+
+                if user:
+                    user_data = {
+                        "id": user[0],
+                        "uuid": user[1],
+                        "name": user[2],
+                        "email": user[3],
+                        "salt": user[4],
+                        "password": user[5]
+                        
+                    }
+                    return user_data
+                else:
+                    return None
+        close_connection(conn)
+    @staticmethod
+    def get_post(id):
+        sql = "SELECT * FROM blog_posts WHERE id = %s"
+        conn = get_connection()
+
+        with conn:
+            with conn.cursor() as cursor:
+                cursor.execute(sql, (id,))
+                user = cursor.fetchone()
+
+                if user:
+                    user_data = {
+                        "id": user[0],
+                        "user_id": user[1],
+                        "title": user[2],
+                        "content": user[3],
+                        "created_at": user[4],                        
+                    }
+                    return user_data
+                else:
+                    return None
+        close_connection(conn)
         
     def user_table():
         sql = """

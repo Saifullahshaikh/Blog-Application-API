@@ -4,11 +4,11 @@
 db_script/
 
 
-# Ignore all files with a specific extension
-
-
 # Ignore compiled Python files
 __pycache__/
+model/__pycache__/
+schema/__pycache__/
+service/__pycache__/
 
 # Ignore virtual environment folder
 blog_app/
