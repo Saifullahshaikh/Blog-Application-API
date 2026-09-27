@@ -1,14 +1,35 @@
-# Ignore specific files
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
 
-# Ignore a specific folder and its contents
-db_script/
-
-
-# Ignore compiled Python files
-__pycache__/
-model/__pycache__/
-schema/__pycache__/
-service/__pycache__/
-
-# Ignore virtual environment folder
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
 blog_app/
+
+# Python cache / compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test / tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local databases
+*.sqlite3
+*.db
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Project-specific local scripts/data
+db_script/
